@@ -1,3 +1,25 @@
 body{
 	background-color: lightcyan;
 }
+
+.container-fluid{
+	font-size: 50px;
+	color: white;
+	text-align: center;
+	text-shadow: 2px 1px navy;
+}
+
+.container{
+	background-color: white;
+	padding: 20px;
+	border: 1px solid navy;
+}
+
+form{
+	padding: 20px;
+}
+
+#right{
+	float:right;
+	text-align: center;
+}
