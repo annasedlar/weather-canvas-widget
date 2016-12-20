@@ -18,8 +18,15 @@ body{
 form{
 	padding: 20px;
 }
+#left{
+	float: left;
+}
 
 #right{
 	float:right;
 	text-align: center;
+}
+
+#graph{
+	padding: 10px;
 }
