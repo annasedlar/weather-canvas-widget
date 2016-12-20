@@ -6,22 +6,17 @@ $(document).ready(function(){
 			// input field has id of location, go get input
 			var location = $('#location').val();
 			var weatherURL = "http://api.openweathermap.org/data/2.5/weather?units=imperial&zip="+location+",us&appid="+apiKey;
-			
 			console.log(weatherURL);
-
 		$.getJSON(weatherURL, function(weatherData){
 			console.log(weatherData);
 			var currTemp = weatherData.main.temp;
 			var city = weatherData.name;
-			var icon = weatherData.weather[0].icon + '.png';
+			var icon = 'openweathermap.org/img/w/'+weatherData.weather[0].icon + '.png';
 			var cityID = weatherData.id;
 			$('#currTemp').html("The current temperature in " + city + " is " + currTemp+ " degrees Fahrenheit");
 			var canvas = $('#weather-canvas');
-
-
 			var context = canvas[0].getContext('2d');
-			console.log(context);
-
+			// console.log(context);
 			//set up the outer circle
 			var currPercent = 0;
 			function animate(current){
@@ -45,13 +40,19 @@ $(document).ready(function(){
 				}
 				context.lineWidth = 3
 				context.font = "50px Arial";
-				context.strokeText(currTemp, 135, 100);
+				context.strokeText(currTemp, 110, 85);
 			}
+			if(weatherData.clouds.all > 50){
+				$('#icon').append("<img src='"+icon+"'>");
+				console.log();
+			}
+
 			$('#graph').prepend(animate());
 			forecastURL = "http://api.openweathermap.org/data/2.5/forecast/daily?id="+cityID+"&units=imperial&appid="+apiKey;
 			$.getJSON(forecastURL, function(forecastData){
-			console.log(forecastData);
-			console.log(forecastURL);
+			// console.log(forecastData);
+			// console.log(forecastURL);
+
 		})
 		});
 
