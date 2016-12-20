@@ -6,6 +6,7 @@ $(document).ready(function(){
 			// input field has id of location, go get input
 			var location = $('#location').val();
 			var weatherURL = "http://api.openweathermap.org/data/2.5/weather?units=imperial&zip="+location+",us&appid="+apiKey;
+			
 			console.log(weatherURL);
 
 		$.getJSON(weatherURL, function(weatherData){
@@ -13,6 +14,7 @@ $(document).ready(function(){
 			var currTemp = weatherData.main.temp;
 			var city = weatherData.name;
 			var icon = weatherData.weather[0].icon + '.png';
+			var cityID = weatherData.id;
 			$('#currTemp').html("The current temperature in " + city + " is " + currTemp+ " degrees Fahrenheit");
 			var canvas = $('#weather-canvas');
 
@@ -31,7 +33,7 @@ $(document).ready(function(){
 
 				//draw outer line
 				context.lineWidth =10; //make thick outer line
-				context.strokeStyle = "#129793";
+				context.strokeStyle = "#3c92a3";
 				context.beginPath();
 				context.arc(155, 75, 70, Math.PI*1.5, (Math.PI*2*current) + Math.PI*1.5);
 				context.stroke(); //we want a line, not fill();
@@ -41,11 +43,19 @@ $(document).ready(function(){
 						animate(currPercent / 100);
 						});
 				}
+				context.lineWidth = 3
+				context.font = "50px Arial";
+				context.strokeText(currTemp, 135, 100);
 			}
 			$('#graph').prepend(animate());
+			forecastURL = "http://api.openweathermap.org/data/2.5/forecast/daily?id="+cityID+"&units=imperial&appid="+apiKey;
+			$.getJSON(forecastURL, function(forecastData){
+			console.log(forecastData);
+			console.log(forecastURL);
+		})
 		});
 
 	});
 
-});
 
+});

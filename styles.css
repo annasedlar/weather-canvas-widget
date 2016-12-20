@@ -13,6 +13,9 @@ body{
 	background-color: white;
 	padding: 20px;
 	border: 1px solid navy;
+	margin: auto;
+	margin-bottom: 20px;
+	
 }
 
 form{
